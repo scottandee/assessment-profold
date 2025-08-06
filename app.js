@@ -5,6 +5,7 @@ require('dotenv').config();
 const fs = require('fs');
 const { createServer } = require('@app-core/server');
 const { createConnection } = require('@app-core/mongoose');
+const path = require('path');
 
 const canLogEndpointInformation = process.env.CAN_LOG_ENDPOINT_INFORMATION;
 
@@ -18,7 +19,7 @@ const server = createServer({
   enableCors: true,
 });
 
-const ENDPOINT_CONFIGS = [];
+const ENDPOINT_CONFIGS = [{ path: './endpoints/reqline/' }];
 
 function logEndpointMetaData(endpointConfigs) {
   const endpointData = [];
