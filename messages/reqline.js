@@ -1,6 +1,6 @@
 module.exports = {
   MISSING_REQLINE_VALUE: 'Missing reqline key/value pair in body of request',
-  INVALID_REQLINE_VALUE: 'Invalid reqline value format. Visit ...',
+  INVALID_REQLINE_VALUE: 'Invalid reqline value format',
   MISSING_HTTP_KEYWORD: 'Missing required HTTP keyword',
   MISSING_URL_KEYWORD: 'Missing required URL keyword',
   INVALID_HTTP_METHOD: 'Invalid HTTP method. Only GET and POST are supported',
@@ -17,4 +17,5 @@ module.exports = {
   USAGE:
     '`{"reqline": "HTTP [method] | URL [URL value] | HEADERS [header json value] | QUERY [query value json] | BODY [body value json]"}` as body of POST Request',
   CANT_ADD_BODY_TO_GET_REQUEST: "Can't add BODY to GET request",
+  MISSING_URL_VALUE: 'Missing URL value',
 };

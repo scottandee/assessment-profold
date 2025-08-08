@@ -4,6 +4,7 @@ const validateType = require('@app-core/validator/rule-validators/type-validatio
 const validateSpacing = require('./validateSpacing');
 const checkIfDupliKeyword = require('./checkIfDupliKeyword');
 const { REQUEST_METHODS, REQUEST_KEYWORDS } = require('../../core/constants');
+const checkIfKeyUppercase = require('./checkKeyUppercase');
 
 function extractRequestParams(command) {
   const parameters = command.trim().split('|');
@@ -21,13 +22,10 @@ function extractRequestParams(command) {
   for (let i = 0; i < parameters.length; i++) {
     const [keyword, value] = validateSpacing(parameters[i], i, parameters.length);
 
-    if (keyword !== keyword.toUpperCase()) {
-      throwAppError(ReqlineMessages.KEYWORDS_UPPERCASE, ERROR_STATUS_CODE_MAPPING.BAD_REQUEST);
-    }
-
     if (i === 0) {
       // First parameter validation: HTTP
       if (keyword === 'HTTP') {
+        checkIfKeyUppercase(keyword);
         checkIfDupliKeyword(keyword, processedKeywords);
 
         if (value !== value.toUpperCase()) {
@@ -48,8 +46,12 @@ function extractRequestParams(command) {
     } else if (i === 1) {
       // Second parameter validation: URL
       if (keyword === 'URL') {
+        checkIfKeyUppercase(keyword);
         checkIfDupliKeyword(keyword, processedKeywords);
 
+        if (!value) {
+          throwAppError(ReqlineMessages.MISSING_URL_VALUE, ERROR_STATUS_CODE_MAPPING.BAD_REQUEST);
+        }
         const result = validateType(value, 'uri');
         if (!result) {
           throwAppError(ReqlineMessages.INVALID_URL_URI, ERROR_STATUS_CODE_MAPPING.BAD_REQUEST);
@@ -62,6 +64,7 @@ function extractRequestParams(command) {
       }
     } else if (REQUEST_KEYWORDS.includes(keyword)) {
       // HEADER / QUERY / BODY validation
+      checkIfKeyUppercase(keyword);
       checkIfDupliKeyword(keyword, processedKeywords);
 
       if (requestMethod === 'GET' && keyword === 'BODY') {
@@ -70,7 +73,9 @@ function extractRequestParams(command) {
           ERROR_STATUS_CODE_MAPPING.BAD_REQUEST
         );
       }
-
+      if (!value) {
+        throwAppError(`Missing ${keyword} value`, ERROR_STATUS_CODE_MAPPING.BAD_REQUEST);
+      }
       try {
         const parsed = JSON.parse(value);
         const result = validateType(parsed, 'object');

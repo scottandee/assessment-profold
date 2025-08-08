@@ -6,6 +6,9 @@ function validateSpacing(parameter, idxOfParam, totalNoOfParams) {
   const subParams = parameter.split(' ');
   const result = [];
 
+  if (idxOfParam > 1 && subParams < 2) {
+    throwAppError(ReqlineMessages.INVALID_REQLINE_VALUE, ERROR_STATUS_CODE_MAPPING);
+  }
   const lenOfSubParam = subParams.length;
   const firstEleInSubParam = 0;
   const lastEleInSubParam = lenOfSubParam - 1;
