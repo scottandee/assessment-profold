@@ -1,0 +1,20 @@
+module.exports = {
+  MISSING_REQLINE_VALUE: 'Missing reqline key/value pair in body of request',
+  INVALID_REQLINE_VALUE: 'Invalid reqline value format. Visit ...',
+  MISSING_HTTP_KEYWORD: 'Missing required HTTP keyword',
+  MISSING_URL_KEYWORD: 'Missing required URL keyword',
+  INVALID_HTTP_METHOD: 'Invalid HTTP method. Only GET and POST are supported',
+  HTTTP_METHOD_UPPERCASE: 'HTTP method must be uppercase',
+  INVALID_SPACING_AROUND_DELIMETER: 'Invalid spacing around pipe delimiter',
+  INVALID_JSON_HEADER: 'Invalid JSON format in HEADERS section',
+  INVALID_JSON_QUERY: 'Invalid JSON format in QUERY section',
+  INVALID_JSON_BODY: 'Invalid JSON format in BODY section',
+  KEYWORDS_UPPERCASE: 'Keywords must be uppercase',
+  MISSING_SPACE_KEYWORD: 'Missing space after keyword',
+  MULTIPLE_SPACES_FOUND: 'Multiple spaces found where single space expected',
+  UNSUPPORTED_KEYWORD: 'is an unsupported keyword',
+  DUPLICATE_KEYWORD: 'is a duplicate keyword',
+  USAGE:
+    '`{"reqline": "HTTP [method] | URL [URL value] | HEADERS [header json value] | QUERY [query value json] | BODY [body value json]"}` as body of POST Request',
+  CANT_ADD_BODY_TO_GET_REQUEST: "Can't add BODY to GET request",
+};

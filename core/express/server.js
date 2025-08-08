@@ -218,7 +218,7 @@ function Server(serverConfig = {}) {
         appLogger.error(requestLog, `error: ${statusCode} ${method} ${path}`);
 
         expressResponse.status(statusCode).json({
-          code: error.errorCode || 'ERR',
+          // code: error.errorCode || 'ERR',
           error: true,
           message: error.isApplicationError ? error.message : 'Some error occured.',
           details: error.details,

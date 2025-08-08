@@ -1,0 +1,4 @@
+const REQUEST_METHODS = ['POST', 'GET'];
+const REQUEST_KEYWORDS = ['URL', 'HTTP', 'HEADERS', 'QUERY', 'BODY'];
+
+module.exports = { REQUEST_METHODS, REQUEST_KEYWORDS };
