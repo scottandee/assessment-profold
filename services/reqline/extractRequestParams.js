@@ -24,7 +24,7 @@ function extractRequestParams(command) {
 
     if (i === 0) {
       // First parameter validation: HTTP
-      if (keyword === 'HTTP') {
+      if (keyword || keyword.toUpperCase() === 'HTTP') {
         checkIfKeyUppercase(keyword);
         checkIfDupliKeyword(keyword, processedKeywords);
 
@@ -45,7 +45,8 @@ function extractRequestParams(command) {
       }
     } else if (i === 1) {
       // Second parameter validation: URL
-      if (keyword === 'URL') {
+      console.log(keyword.toUpperCase());
+      if (keyword || keyword.toUpperCase() === 'URL') {
         checkIfKeyUppercase(keyword);
         checkIfDupliKeyword(keyword, processedKeywords);
 
@@ -62,7 +63,7 @@ function extractRequestParams(command) {
       } else {
         throwAppError(ReqlineMessages.MISSING_URL_KEYWORD, ERROR_STATUS_CODE_MAPPING.BAD_REQUEST);
       }
-    } else if (REQUEST_KEYWORDS.includes(keyword)) {
+    } else if (REQUEST_KEYWORDS.includes(keyword || keyword.toUpperCase())) {
       // HEADER / QUERY / BODY validation
       checkIfKeyUppercase(keyword);
       checkIfDupliKeyword(keyword, processedKeywords);
