@@ -45,7 +45,6 @@ function extractRequestParams(command) {
       }
     } else if (i === 1) {
       // Second parameter validation: URL
-      console.log(keyword.toUpperCase());
       if (keyword || keyword.toUpperCase() === 'URL') {
         checkIfKeyUppercase(keyword);
         checkIfDupliKeyword(keyword, processedKeywords);
