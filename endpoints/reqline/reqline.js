@@ -24,6 +24,26 @@ module.exports = createHandler({
     const reqEndTime = getCurrentDateTime();
 
     const duration = reqEndTime - reqStartTime;
+    if (result.isApplicationError) {
+      return {
+        status: helpers.http_statuses.HTTP_200_OK,
+        data: {
+          request: {
+            query: httpReq.query,
+            body: httpReq.body,
+            headers: httpReq.headers,
+            full_url: fullUrl,
+          },
+          response: {
+            http_status: result.context.response.statusCode,
+            duration,
+            request_start_timestamp: reqStartTime,
+            request_stop_timestamp: reqEndTime,
+            response_data: result.context.response.data,
+          },
+        },
+      };
+    }
 
     return {
       status: helpers.http_statuses.HTTP_200_OK,
